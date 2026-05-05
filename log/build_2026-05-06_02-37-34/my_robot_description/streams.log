@@ -1,0 +1,22 @@
+[0.790s] Invoking command in '/home/sahil/Desktop/ros_learn/ros2_SLAM/slam_bot/src/my_robot_description': PYTHONPATH=/home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/my_robot_description build --build-base /home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_description/build install --record /home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_description/install.log --single-version-externally-managed install_data
+[0.958s] running egg_info
+[0.958s] writing ../../../build/my_robot_description/my_robot_description.egg-info/PKG-INFO
+[0.958s] writing dependency_links to ../../../build/my_robot_description/my_robot_description.egg-info/dependency_links.txt
+[0.958s] writing entry points to ../../../build/my_robot_description/my_robot_description.egg-info/entry_points.txt
+[0.959s] writing requirements to ../../../build/my_robot_description/my_robot_description.egg-info/requires.txt
+[0.959s] writing top-level names to ../../../build/my_robot_description/my_robot_description.egg-info/top_level.txt
+[0.960s] reading manifest file '../../../build/my_robot_description/my_robot_description.egg-info/SOURCES.txt'
+[0.960s] adding license file 'LICENSE'
+[0.960s] writing manifest file '../../../build/my_robot_description/my_robot_description.egg-info/SOURCES.txt'
+[0.960s] running build
+[0.960s] running build_py
+[0.961s] running install
+[0.961s] running install_lib
+[0.961s] running install_data
+[0.962s] copying urdf/my_robot.urdf.xml -> /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_description/share/my_robot_description/urdf
+[0.962s] running install_egg_info
+[0.963s] removing '/home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_description/lib/python3.10/site-packages/my_robot_description-0.0.0-py3.10.egg-info' (and everything under it)
+[0.963s] Copying ../../../build/my_robot_description/my_robot_description.egg-info to /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_description/lib/python3.10/site-packages/my_robot_description-0.0.0-py3.10.egg-info
+[0.964s] running install_scripts
+[0.978s] writing list of installed files to '/home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_description/install.log'
+[0.997s] Invoked command in '/home/sahil/Desktop/ros_learn/ros2_SLAM/slam_bot/src/my_robot_description' returned '0': PYTHONPATH=/home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/my_robot_description build --build-base /home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_description/build install --record /home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_description/install.log --single-version-externally-managed install_data

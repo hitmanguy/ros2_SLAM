@@ -3,6 +3,8 @@
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/ament_index/resource_index/packages/my_robot_bringup
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/package.xml
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/launch/simulation.launch.py
+/home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/config/slam_toolbox_params.yaml
+/home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/config/ekf.yaml
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/lib/python3.10/site-packages/my_robot_bringup-0.0.0-py3.10.egg-info/zip-safe
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/lib/python3.10/site-packages/my_robot_bringup-0.0.0-py3.10.egg-info/PKG-INFO
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/lib/python3.10/site-packages/my_robot_bringup-0.0.0-py3.10.egg-info/requires.txt

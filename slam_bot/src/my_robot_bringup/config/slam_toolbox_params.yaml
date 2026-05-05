@@ -1,0 +1,43 @@
+slam_toolbox:
+  ros__parameters:
+
+    # Solver
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+
+    # Frames — must match your URDF and bridge
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_footprint
+    scan_topic: /scan
+    mode: mapping
+
+    # Map settings
+    map_update_interval: 5.0
+    resolution: 0.05
+    max_laser_range: 20.0
+
+    # Loop closure
+    loop_search_maximum_distance: 3.0
+    do_loop_closing: true
+    loop_match_minimum_chain_size: 10
+    loop_match_maximum_variance_covariance: 3.0
+    loop_match_minimum_response_fine: 0.35
+
+    # Performance
+    transform_publish_period: 0.02
+    # Save map relative to home — change path as needed
+    #map_file_name: ~/ros2_ws/my_map
+    use_scan_matching: true
+    use_scan_barycenter: true
+    minimum_travel_distance: 0.5
+    minimum_travel_heading: 0.5
+    scan_buffer_size: 10
+    scan_buffer_maximum_scan_distance: 10.0
+    link_match_minimum_response_fine: 0.1
+    link_scan_maximum_distance: 1.5
+
+    # CRITICAL — must be true when running in Gazebo
+    use_sim_time: true

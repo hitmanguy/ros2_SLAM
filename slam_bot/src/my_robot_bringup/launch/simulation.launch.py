@@ -22,6 +22,18 @@ def generate_launch_description():
         'empty.sdf'
     ])
 
+    ekf_config = PathJoinSubstitution([
+        FindPackageShare('my_robot_bringup'),
+        "config",
+        "ekf.yaml"
+    ])
+
+    slam_params = PathJoinSubstitution([
+        FindPackageShare('my_robot_bringup'),
+        'config',
+        'slam_toolbox_params.yaml'
+    ])
+
     return LaunchDescription([
 
         # 1. Start Gazebo
@@ -36,6 +48,15 @@ def generate_launch_description():
             executable='robot_state_publisher',
             parameters=[{'robot_description': ParameterValue(urdf, value_type=str)}],
             output='screen'
+        ),
+
+        # Robot Localization EKF Node
+        Node(
+            package="robot_localization",
+            executable="ekf_node",
+            name="ekf_filter_node",
+            output="screen",
+            parameters=[ekf_config, {"use_sim_time": True}],
         ),
 
         # 3. Spawn robot in Gazebo (delayed to let Gazebo finish loading)
@@ -91,4 +112,16 @@ def generate_launch_description():
             output='screen'
         ),
 
+        TimerAction(
+            period=6.0,
+            actions=[
+                Node(
+                    package='slam_toolbox',
+                    executable='async_slam_toolbox_node',
+                    name='slam_toolbox',
+                    parameters=[slam_params],
+                    output='screen',
+                )
+            ]
+        ),
     ])

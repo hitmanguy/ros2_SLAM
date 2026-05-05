@@ -70,7 +70,8 @@ class SquareMover(Node):
         # Odometry subscriber
         self.odom_sub = self.create_subscription(
             Odometry,
-            '/odom',
+            # '/odom',
+            '/odometry/filtered',
             self.odom_callback,
             10
         )

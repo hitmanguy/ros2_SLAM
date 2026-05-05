@@ -26,7 +26,8 @@ setup(
         'console_scripts': [
             'simple_controller = my_robot_control.simple_controller:main',
             'square = my_robot_control.square_move:main',
-            'truth = my_robot_control.ground_truth:main'
+            'truth = my_robot_control.ground_truth:main',
+            'odom_broadcast = my_robot_control.odom_tf_broadcaster:main',
         ],
     },
 )
