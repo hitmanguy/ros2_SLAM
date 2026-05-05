@@ -25,6 +25,8 @@ setup(
     entry_points={
         'console_scripts': [
             'simple_controller = my_robot_control.simple_controller:main',
+            'square = my_robot_control.square_move:main',
+            'truth = my_robot_control.ground_truth:main'
         ],
     },
 )

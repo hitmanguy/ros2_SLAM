@@ -1,0 +1,24 @@
+running egg_info
+writing ../../../build/my_robot_control/my_robot_control.egg-info/PKG-INFO
+writing dependency_links to ../../../build/my_robot_control/my_robot_control.egg-info/dependency_links.txt
+writing entry points to ../../../build/my_robot_control/my_robot_control.egg-info/entry_points.txt
+writing requirements to ../../../build/my_robot_control/my_robot_control.egg-info/requires.txt
+writing top-level names to ../../../build/my_robot_control/my_robot_control.egg-info/top_level.txt
+reading manifest file '../../../build/my_robot_control/my_robot_control.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../../../build/my_robot_control/my_robot_control.egg-info/SOURCES.txt'
+running build
+running build_py
+copying my_robot_control/ground_truth.py -> /home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_control/build/lib/my_robot_control
+running install
+running install_lib
+copying /home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_control/build/lib/my_robot_control/ground_truth.py -> /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_control/lib/python3.10/site-packages/my_robot_control
+byte-compiling /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_control/lib/python3.10/site-packages/my_robot_control/ground_truth.py to ground_truth.cpython-310.pyc
+running install_data
+running install_egg_info
+removing '/home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_control/lib/python3.10/site-packages/my_robot_control-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../../build/my_robot_control/my_robot_control.egg-info to /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_control/lib/python3.10/site-packages/my_robot_control-0.0.0-py3.10.egg-info
+running install_scripts
+Installing simple_controller script to /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_control/lib/my_robot_control
+Installing square = my_robot_control.square_move:maintruth_remapper script to /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_control/lib/my_robot_control
+writing list of installed files to '/home/sahil/Desktop/ros_learn/ros2_SLAM/build/my_robot_control/install.log'
