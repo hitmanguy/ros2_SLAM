@@ -1,0 +1,21 @@
+[0.749s] Invoking command in '/home/sahil/Desktop/ros_learn/slam_bot/src/my_robot_bringup': PYTHONPATH=/home/sahil/Desktop/ros_learn/slam_bot/build/my_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sahil/Desktop/ros_learn/slam_bot/install/my_robot_bringup/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_bringup build --build-base /home/sahil/Desktop/ros_learn/slam_bot/build/my_robot_bringup/build install --record /home/sahil/Desktop/ros_learn/slam_bot/build/my_robot_bringup/install.log --single-version-externally-managed install_data
+[0.898s] running egg_info
+[0.898s] writing ../../build/my_robot_bringup/my_robot_bringup.egg-info/PKG-INFO
+[0.898s] writing dependency_links to ../../build/my_robot_bringup/my_robot_bringup.egg-info/dependency_links.txt
+[0.898s] writing entry points to ../../build/my_robot_bringup/my_robot_bringup.egg-info/entry_points.txt
+[0.898s] writing requirements to ../../build/my_robot_bringup/my_robot_bringup.egg-info/requires.txt
+[0.898s] writing top-level names to ../../build/my_robot_bringup/my_robot_bringup.egg-info/top_level.txt
+[0.899s] reading manifest file '../../build/my_robot_bringup/my_robot_bringup.egg-info/SOURCES.txt'
+[0.899s] adding license file 'LICENSE'
+[0.900s] writing manifest file '../../build/my_robot_bringup/my_robot_bringup.egg-info/SOURCES.txt'
+[0.900s] running build
+[0.900s] running build_py
+[0.900s] running install
+[0.900s] running install_lib
+[0.901s] running install_data
+[0.901s] running install_egg_info
+[0.903s] removing '/home/sahil/Desktop/ros_learn/slam_bot/install/my_robot_bringup/lib/python3.10/site-packages/my_robot_bringup-0.0.0-py3.10.egg-info' (and everything under it)
+[0.903s] Copying ../../build/my_robot_bringup/my_robot_bringup.egg-info to /home/sahil/Desktop/ros_learn/slam_bot/install/my_robot_bringup/lib/python3.10/site-packages/my_robot_bringup-0.0.0-py3.10.egg-info
+[0.903s] running install_scripts
+[0.919s] writing list of installed files to '/home/sahil/Desktop/ros_learn/slam_bot/build/my_robot_bringup/install.log'
+[0.945s] Invoked command in '/home/sahil/Desktop/ros_learn/slam_bot/src/my_robot_bringup' returned '0': PYTHONPATH=/home/sahil/Desktop/ros_learn/slam_bot/build/my_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sahil/Desktop/ros_learn/slam_bot/install/my_robot_bringup/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_bringup build --build-base /home/sahil/Desktop/ros_learn/slam_bot/build/my_robot_bringup/build install --record /home/sahil/Desktop/ros_learn/slam_bot/build/my_robot_bringup/install.log --single-version-externally-managed install_data
