@@ -31,8 +31,8 @@
       <mass value="2.0"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia ixx="0.015" ixy="0.0" ixz="0.0"
-                            iyy="0.037" iyz="0.0"
-                                        izz="0.037"/>
+               iyy="0.037" iyz="0.0"
+               izz="0.037"/>
     </inertial>
     <visual>
       <geometry>
@@ -55,8 +55,8 @@
     <inertial>
       <mass value="0.5"/>
       <inertia ixx="0.001" ixy="0.0" ixz="0.0"
-                            iyy="0.001" iyz="0.0"
-                                        izz="0.001"/>
+               iyy="0.001" iyz="0.0"
+               izz="0.001"/>
     </inertial>
     <visual>
       <geometry>
@@ -83,8 +83,8 @@
     <inertial>
       <mass value="0.5"/>
       <inertia ixx="0.001" ixy="0.0" ixz="0.0"
-                            iyy="0.001" iyz="0.0"
-                                        izz="0.001"/>
+               iyy="0.001" iyz="0.0"
+               izz="0.001"/>
     </inertial>
     <visual>
       <geometry>
@@ -111,8 +111,8 @@
     <inertial>
       <mass value="0.2"/>
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
-                             iyy="0.0001" iyz="0.0"
-                                          izz="0.0001"/>
+               iyy="0.0001" iyz="0.0"
+               izz="0.0001"/>
     </inertial>
     <visual>
       <geometry>
@@ -146,8 +146,8 @@
     <inertial>
       <mass value="0.1"/>
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
-                             iyy="0.0001" iyz="0.0"
-                                          izz="0.0001"/>
+               iyy="0.0001" iyz="0.0"
+               izz="0.0001"/>
     </inertial>
     <visual>
       <geometry>
@@ -173,8 +173,8 @@
     <inertial>
       <mass value="0.05"/>
       <inertia ixx="0.00001" ixy="0.0" ixz="0.0"
-                              iyy="0.00001" iyz="0.0"
-                                            izz="0.00001"/>
+               iyy="0.00001" iyz="0.0"
+               izz="0.00001"/>
     </inertial>
     <visual>
       <geometry>
@@ -195,36 +195,40 @@
     <origin xyz="0 0 0.08" rpy="0 0 0"/>
   </joint>
 
+  <!-- Camera -->
   <link name="camera_link">
     <inertial>
-    <mass value="0.05"/>
-    <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
+      <mass value="0.05"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
+               iyy="0.00001" iyz="0.0" 
+               izz="0.00001"/>
     </inertial>
     <visual>
-    <geometry>
-    <box size="0.02 0.06 0.02"/>
-    </geometry>
-    <material name="blue"/>
+      <geometry>
+        <box size="0.02 0.06 0.02"/>
+      </geometry>
+      <material name="blue"/>
     </visual>
     <collision>
-    <geometry>
-    <box size="0.02 0.06 0.02"/>
-    </geometry>
+      <geometry>
+        <box size="0.02 0.06 0.02"/>
+      </geometry>
     </collision>
   </link>
-    <joint name="camera_joint" type="fixed">
-      <parent link="base_link"/>
-      <child link="camera_link"/>
-      <!-- Mounted at front-center, elevated -->
-      <origin xyz="0.2 0 0.1" rpy="0 0 0"/>
-    </joint>
-    <!--
-    Optical frame (ROS convention: Z forward, X right, Y down) 
-    -->
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <!-- Mounted at front-center, elevated -->
+    <origin xyz="0.2 0 0.1" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Optical frame (ROS convention: Z forward, X right, Y down) -->
   <link name="camera_optical_link"/>
+  
   <joint name="camera_optical_joint" type="fixed">
-     <parent link="camera_link"/>
-     <child link="camera_optical_link"/>
+    <parent link="camera_link"/>
+    <child link="camera_optical_link"/>
     <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
   </joint>
 
@@ -256,14 +260,14 @@
     </plugin>
   </gazebo>
 
-  <!-- Joint State Publisher -->
+  <!-- Joint State Publisher & IMU Plugin -->
   <gazebo>
     <plugin filename="libignition-gazebo-joint-state-publisher-system.so"
             name="ignition::gazebo::systems::JointStatePublisher">
       <topic>/joint_states</topic>
     </plugin>
     <plugin filename="libignition-gazebo-imu-system.so"
-        name="ignition::gazebo::systems::Imu">
+            name="ignition::gazebo::systems::Imu">
     </plugin>
   </gazebo>
 
@@ -336,25 +340,26 @@
     </sensor>
   </gazebo>
 
+  <!-- Camera Sensor -->
   <gazebo reference="camera_link">
     <sensor name="camera" type="camera">
-    <always_on>1</always_on>
-    <update_rate>30</update_rate>
-    <topic>/camera/image_raw</topic>
-    <ignition_frame_id>camera_optical_link</ignition_frame_id>
-    <camera>
-    <!-- ~80 degrees -->
-    <horizontal_fov>1.3962634</horizontal_fov>
-    <image>
-    <width>640</width>
-    <height>480</height>
-    <format>R8G8B8</format>
-    </image>
-    <clip>
-    <near>0.02</near>
-    <far>300</far>
-    </clip>
-    </camera>
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <topic>/camera/image_raw</topic>
+      <ignition_frame_id>camera_optical_link</ignition_frame_id>
+      <camera>
+        <!-- ~80 degrees -->
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
     </sensor>
   </gazebo>
 
