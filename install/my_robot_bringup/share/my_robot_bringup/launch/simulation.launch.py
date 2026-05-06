@@ -4,6 +4,8 @@ from launch.substitutions import PathJoinSubstitution, FileContent
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.parameter_descriptions import ParameterValue
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
@@ -32,6 +34,18 @@ def generate_launch_description():
         FindPackageShare('my_robot_bringup'),
         'config',
         'slam_toolbox_params.yaml'
+    ])
+
+    nav2_params = PathJoinSubstitution([
+        FindPackageShare('my_robot_bringup'),
+        'config',
+        'nav2_params.yaml'
+    ])
+
+    rviz_config = PathJoinSubstitution([
+        FindPackageShare('nav2_bringup'),
+        'rviz',
+        'nav2_default_view.rviz'
     ])
 
     return LaunchDescription([
@@ -86,13 +100,9 @@ def generate_launch_description():
                 '/odom@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
                 '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU',
                 '/joint_states@sensor_msgs/msg/JointState[ignition.msgs.Model',
-                '/model/my_robot/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
                 '/model/my_robot/pose@geometry_msgs/msg/PoseStamped[ignition.msgs.Pose',
                 '/camera/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
                 '/camera/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo'
-            ],
-            remappings=[
-                ('/model/my_robot/tf', '/tf'),
             ],
             output='screen'
         ),
@@ -120,6 +130,40 @@ def generate_launch_description():
                     executable='async_slam_toolbox_node',
                     name='slam_toolbox',
                     parameters=[slam_params],
+                    output='screen',
+                )
+            ]
+        ),
+
+        TimerAction(
+            period=10.0,
+            actions=[
+                IncludeLaunchDescription(
+                    PythonLaunchDescriptionSource([
+                        FindPackageShare('nav2_bringup'),
+                        '/launch/navigation_launch.py'
+                    ]),
+                    launch_arguments={
+                        'use_sim_time': 'true',
+                        'params_file': nav2_params,
+                        # SLAM publishes the map — no need for map_server or AMCL
+                        'slam': 'False',
+                        'use_composition': 'False',
+                    }.items(),
+                )
+            ]
+        ),
+
+        # 9. RViz2 with the standard Nav2 layout (2D Nav Goal tool included)
+        TimerAction(
+            period=6.0,
+            actions=[
+                Node(
+                    package='rviz2',
+                    executable='rviz2',
+                    name='rviz2',
+                    arguments=['-d', rviz_config],
+                    parameters=[{'use_sim_time': True}],
                     output='screen',
                 )
             ]

@@ -1,30 +1,47 @@
 <?xml version="1.0"?>
+<!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║           my_nav2_robot  —  2-Wheel Diff Drive           ║
+  ║   Sensors : LiDAR  |  IMU  |  RGB Camera                 ║
+  ║   Physics : Ignition Gazebo (Fortress / Garden)          ║
+  ╚══════════════════════════════════════════════════════════╝
+-->
 <robot name="my_nav2_robot">
 
-  <!-- ==================== MATERIALS ==================== -->
+  <!-- ════════════════════════════════════════════════
+       MATERIALS
+       ════════════════════════════════════════════════ -->
 
-  <material name="green">
-    <color rgba="0.2 0.7 0.3 1.0"/>
-  </material>
+  <material name="chassis">       <color rgba="0.15 0.15 0.18 1.0"/> </material>  <!-- dark charcoal  -->
+  <material name="accent">        <color rgba="1.00 0.45 0.00 1.0"/> </material>  <!-- bright orange  -->
+  <material name="wheel">         <color rgba="0.08 0.08 0.08 1.0"/> </material>  <!-- matte rubber   -->
+  <material name="hub">           <color rgba="0.75 0.75 0.78 1.0"/> </material>  <!-- aluminium      -->
+  <material name="lidar_body">    <color rgba="0.10 0.10 0.10 1.0"/> </material>  <!-- gloss black    -->
+  <material name="lidar_lens">    <color rgba="0.90 0.05 0.05 0.85"/> </material> <!-- red glass      -->
+  <material name="imu_chip">      <color rgba="0.13 0.55 0.13 1.0"/> </material>  <!-- PCB green      -->
+  <material name="camera_body">   <color rgba="0.20 0.20 0.22 1.0"/> </material>  <!-- dark grey      -->
+  <material name="camera_lens">   <color rgba="0.05 0.15 0.60 0.9"/> </material>  <!-- blue glass     -->
+  <material name="caster">        <color rgba="0.55 0.55 0.58 1.0"/> </material>  <!-- nylon grey     -->
+  <material name="mast">          <color rgba="0.25 0.25 0.28 1.0"/> </material>  <!-- anodised alu   -->
 
-  <material name="black">
-    <color rgba="0.1 0.1 0.1 1.0"/>
-  </material>
 
-  <material name="blue">
-    <color rgba="0.0 0.0 0.8 1.0"/>
-  </material>
-
-
-  <!-- ==================== BASE ==================== -->
+  <!-- ════════════════════════════════════════════════
+       BASE FOOTPRINT  (ground-level reference frame)
+       ════════════════════════════════════════════════ -->
 
   <link name="base_footprint"/>
 
   <joint name="base_footprint_joint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+    <origin xyz="0 0 0.10" rpy="0 0 0"/>
   </joint>
+
+
+  <!-- ════════════════════════════════════════════════
+       CHASSIS
+       Low-profile slab + orange accent stripe + front bumper
+       ════════════════════════════════════════════════ -->
 
   <link name="base_link">
     <inertial>
@@ -34,23 +51,40 @@
                iyy="0.037" iyz="0.0"
                izz="0.037"/>
     </inertial>
+
+    <!-- Main slab -->
     <visual>
-      <geometry>
-        <box size="0.4 0.3 0.1"/>
-      </geometry>
-      <material name="green"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.40 0.30 0.08"/></geometry>
+      <material name="chassis"/>
     </visual>
+
+    <!-- Orange accent stripe along top centre -->
+    <visual>
+      <origin xyz="0.0 0.0 0.045" rpy="0 0 0"/>
+      <geometry><box size="0.36 0.04 0.010"/></geometry>
+      <material name="accent"/>
+    </visual>
+
+    <!-- Front bumper bar -->
+    <visual>
+      <origin xyz="0.195 0.0 -0.005" rpy="0 0 0"/>
+      <geometry><box size="0.020 0.28 0.060"/></geometry>
+      <material name="accent"/>
+    </visual>
+
     <collision>
-      <geometry>
-        <box size="0.4 0.3 0.1"/>
-      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.40 0.30 0.08"/></geometry>
     </collision>
   </link>
 
 
-  <!-- ==================== WHEELS ==================== -->
+  <!-- ════════════════════════════════════════════════
+       LEFT DRIVE WHEEL
+       Rubber tyre + aluminium hub disc
+       ════════════════════════════════════════════════ -->
 
-  <!-- Left Wheel -->
   <link name="left_wheel">
     <inertial>
       <mass value="0.5"/>
@@ -58,27 +92,35 @@
                iyy="0.001" iyz="0.0"
                izz="0.001"/>
     </inertial>
+    <!-- Tyre -->
     <visual>
-      <geometry>
-        <cylinder radius="0.1" length="0.05"/>
-      </geometry>
-      <material name="black"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.10" length="0.05"/></geometry>
+      <material name="wheel"/>
+    </visual>
+    <!-- Hub -->
+    <visual>
+      <origin xyz="0 0 0.016" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.055" length="0.008"/></geometry>
+      <material name="hub"/>
     </visual>
     <collision>
-      <geometry>
-        <cylinder radius="0.1" length="0.05"/>
-      </geometry>
+      <geometry><cylinder radius="0.10" length="0.05"/></geometry>
     </collision>
   </link>
 
   <joint name="left_wheel_joint" type="continuous">
     <parent link="base_link"/>
     <child link="left_wheel"/>
-    <origin xyz="-0.1 0.175 0" rpy="-1.5708 0 0"/>
+    <origin xyz="-0.05 0.175 -0.0" rpy="-1.5708 0 0"/>
     <axis xyz="0 0 1"/>
   </joint>
 
-  <!-- Right Wheel -->
+
+  <!-- ════════════════════════════════════════════════
+       RIGHT DRIVE WHEEL
+       ════════════════════════════════════════════════ -->
+
   <link name="right_wheel">
     <inertial>
       <mass value="0.5"/>
@@ -86,27 +128,35 @@
                iyy="0.001" iyz="0.0"
                izz="0.001"/>
     </inertial>
+    <!-- Tyre -->
     <visual>
-      <geometry>
-        <cylinder radius="0.1" length="0.05"/>
-      </geometry>
-      <material name="black"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.10" length="0.05"/></geometry>
+      <material name="wheel"/>
+    </visual>
+    <!-- Hub -->
+    <visual>
+      <origin xyz="0 0 -0.016" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.055" length="0.008"/></geometry>
+      <material name="hub"/>
     </visual>
     <collision>
-      <geometry>
-        <cylinder radius="0.1" length="0.05"/>
-      </geometry>
+      <geometry><cylinder radius="0.10" length="0.05"/></geometry>
     </collision>
   </link>
 
   <joint name="right_wheel_joint" type="continuous">
     <parent link="base_link"/>
     <child link="right_wheel"/>
-    <origin xyz="-0.1 -0.175 0" rpy="-1.5708 0 0"/>
+    <origin xyz="-0.05 -0.175 -0.0" rpy="-1.5708 0 0"/>
     <axis xyz="0 0 1"/>
   </joint>
 
-  <!-- Caster Wheel (passive, frictionless) -->
+
+  <!-- ════════════════════════════════════════════════
+       CASTER WHEEL  (frictionless front ball)
+       ════════════════════════════════════════════════ -->
+
   <link name="caster_wheel">
     <inertial>
       <mass value="0.2"/>
@@ -115,22 +165,18 @@
                izz="0.0001"/>
     </inertial>
     <visual>
-      <geometry>
-        <sphere radius="0.05"/>
-      </geometry>
-      <material name="black"/>
+      <geometry><sphere radius="0.04"/></geometry>
+      <material name="caster"/>
     </visual>
     <collision>
-      <geometry>
-        <sphere radius="0.05"/>
-      </geometry>
+      <geometry><sphere radius="0.04"/></geometry>
     </collision>
   </link>
 
   <joint name="caster_wheel_joint" type="fixed">
     <parent link="base_link"/>
     <child link="caster_wheel"/>
-    <origin xyz="0.15 0 -0.05" rpy="0 0 0"/>
+    <origin xyz="0.16 0 -0.06" rpy="0 0 0"/>   <!-- -0.06 = drops by full wheel_radius - caster_radius -->
   </joint>
 
   <gazebo reference="caster_wheel">
@@ -139,36 +185,87 @@
   </gazebo>
 
 
-  <!-- ==================== SENSORS ==================== -->
+  <!-- ════════════════════════════════════════════════
+       SENSOR MAST  (thin pillar that elevates LiDAR)
+       ════════════════════════════════════════════════ -->
 
-  <!-- LiDAR -->
+  <link name="sensor_mast">
+    <inertial>
+      <mass value="0.08"/>
+      <inertia ixx="0.00005" ixy="0.0" ixz="0.0"
+               iyy="0.00005" iyz="0.0"
+               izz="0.00005"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.015" length="0.12"/></geometry>
+      <material name="mast"/>
+    </visual>
+    <collision>
+      <geometry><cylinder radius="0.015" length="0.12"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="sensor_mast_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="sensor_mast"/>
+    <origin xyz="-0.05 0 0.10" rpy="0 0 0"/>
+  </joint>
+
+
+  <!-- ════════════════════════════════════════════════
+       LIDAR
+       Black drum  +  red laser-lens band  +  orange cap
+       Sits on top of the mast
+       ════════════════════════════════════════════════ -->
+
   <link name="lidar_link">
     <inertial>
-      <mass value="0.1"/>
+      <mass value="0.10"/>
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
                iyy="0.0001" iyz="0.0"
                izz="0.0001"/>
     </inertial>
+
+    <!-- Outer drum -->
     <visual>
-      <geometry>
-        <cylinder radius="0.05" length="0.04"/>
-      </geometry>
-      <material name="blue"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.050" length="0.055"/></geometry>
+      <material name="lidar_body"/>
     </visual>
+
+    <!-- Red lens ring around equator -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.053" length="0.014"/></geometry>
+      <material name="lidar_lens"/>
+    </visual>
+
+    <!-- Orange status cap on top -->
+    <visual>
+      <origin xyz="0 0 0.032" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.018" length="0.008"/></geometry>
+      <material name="accent"/>
+    </visual>
+
     <collision>
-      <geometry>
-        <cylinder radius="0.05" length="0.04"/>
-      </geometry>
+      <geometry><cylinder radius="0.053" length="0.055"/></geometry>
     </collision>
   </link>
 
   <joint name="lidar_joint" type="fixed">
-    <parent link="base_link"/>
+    <parent link="sensor_mast"/>
     <child link="lidar_link"/>
-    <origin xyz="0 0 0.15" rpy="0 0 0"/>
+    <origin xyz="0 0 0.088" rpy="0 0 0"/>
   </joint>
 
-  <!-- IMU -->
+
+  <!-- ════════════════════════════════════════════════
+       IMU
+       PCB-green substrate + silver IC package
+       Sits flush on the top-right of the chassis
+       ════════════════════════════════════════════════ -->
+
   <link name="imu_link">
     <inertial>
       <mass value="0.05"/>
@@ -176,56 +273,82 @@
                iyy="0.00001" iyz="0.0"
                izz="0.00001"/>
     </inertial>
+
+    <!-- PCB board -->
     <visual>
-      <geometry>
-        <box size="0.02 0.02 0.02"/>
-      </geometry>
-      <material name="blue"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.032 0.032 0.004"/></geometry>
+      <material name="imu_chip"/>
     </visual>
+
+    <!-- IC package (silver square on top) -->
+    <visual>
+      <origin xyz="0 0 0.004" rpy="0 0 0"/>
+      <geometry><box size="0.014 0.014 0.005"/></geometry>
+      <material name="hub"/>
+    </visual>
+
     <collision>
-      <geometry>
-        <box size="0.02 0.02 0.02"/>
-      </geometry>
+      <geometry><box size="0.032 0.032 0.010"/></geometry>
     </collision>
   </link>
 
   <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
     <child link="imu_link"/>
-    <origin xyz="0 0 0.08" rpy="0 0 0"/>
+    <origin xyz="0.06 0.08 0.045" rpy="0 0 0"/>
   </joint>
 
-  <!-- Camera -->
+
+  <!-- ════════════════════════════════════════════════
+       CAMERA
+       Rectangular housing + round blue lens + trim stripe
+       Mounted front-centre, facing forward
+       ════════════════════════════════════════════════ -->
+
   <link name="camera_link">
     <inertial>
       <mass value="0.05"/>
-      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
-               iyy="0.00001" iyz="0.0" 
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0"
+               iyy="0.00001" iyz="0.0"
                izz="0.00001"/>
     </inertial>
+
+    <!-- Camera body -->
     <visual>
-      <geometry>
-        <box size="0.02 0.06 0.02"/>
-      </geometry>
-      <material name="blue"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.028 0.080 0.032"/></geometry>
+      <material name="camera_body"/>
     </visual>
+
+    <!-- Lens barrel (blue cylinder facing forward along X) -->
+    <visual>
+      <origin xyz="0.014 0 0" rpy="0 1.5708 0"/>
+      <geometry><cylinder radius="0.011" length="0.010"/></geometry>
+      <material name="camera_lens"/>
+    </visual>
+
+    <!-- Orange accent trim strip above lens -->
+    <visual>
+      <origin xyz="0.012 0 0.019" rpy="0 0 0"/>
+      <geometry><box size="0.006 0.074 0.004"/></geometry>
+      <material name="accent"/>
+    </visual>
+
     <collision>
-      <geometry>
-        <box size="0.02 0.06 0.02"/>
-      </geometry>
+      <geometry><box size="0.028 0.080 0.032"/></geometry>
     </collision>
   </link>
 
   <joint name="camera_joint" type="fixed">
     <parent link="base_link"/>
     <child link="camera_link"/>
-    <!-- Mounted at front-center, elevated -->
-    <origin xyz="0.2 0 0.1" rpy="0 0 0"/>
+    <origin xyz="0.230 0.0 0.030" rpy="0 0 0"/>
   </joint>
 
-  <!-- Optical frame (ROS convention: Z forward, X right, Y down) -->
+  <!-- Optical frame: ROS convention  Z-forward · X-right · Y-down -->
   <link name="camera_optical_link"/>
-  
+
   <joint name="camera_optical_joint" type="fixed">
     <parent link="camera_link"/>
     <child link="camera_optical_link"/>
@@ -233,9 +356,34 @@
   </joint>
 
 
-  <!-- ==================== GAZEBO PLUGINS ==================== -->
+  <!-- ════════════════════════════════════════════════
+       GAZEBO MATERIAL OVERRIDES  (classic Gazebo ogre)
+       ════════════════════════════════════════════════ -->
 
-  <!-- Differential Drive Controller -->
+  <gazebo reference="base_link">    <material>Gazebo/DarkGrey</material>  </gazebo>
+  <gazebo reference="sensor_mast">  <material>Gazebo/Grey</material>       </gazebo>
+  <gazebo reference="lidar_link">   <material>Gazebo/Black</material>      </gazebo>
+  <gazebo reference="camera_link">  <material>Gazebo/DarkGrey</material>   </gazebo>
+  <gazebo reference="imu_link">     <material>Gazebo/Green</material>      </gazebo>
+  <gazebo reference="left_wheel">
+    <mu1>0.8</mu1> <mu2>0.8</mu2>
+    <kp>500000.0</kp> <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="right_wheel">
+    <mu1>0.8</mu1> <mu2>0.8</mu2>
+    <kp>500000.0</kp> <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+
+  <!-- ════════════════════════════════════════════════
+       GAZEBO PLUGINS
+       ════════════════════════════════════════════════ -->
+
+  <!-- Differential Drive + Pose Publisher (TF source) -->
   <gazebo>
     <plugin filename="libignition-gazebo-diff-drive-system.so"
             name="ignition::gazebo::systems::DiffDrive">
@@ -248,7 +396,9 @@
       <odom_topic>/odom</odom_topic>
       <frame_id>odom</frame_id>
       <child_frame_id>base_footprint</child_frame_id>
+      <odom_tf_topic>/dummy_tf</odom_tf_topic>
     </plugin>
+
     <plugin filename="libignition-gazebo-pose-publisher-system.so"
             name="ignition::gazebo::systems::PosePublisher">
       <publish_link_pose>true</publish_link_pose>
@@ -260,36 +410,18 @@
     </plugin>
   </gazebo>
 
-  <!-- Joint State Publisher & IMU Plugin -->
+  <!-- Joint State Publisher + IMU system -->
   <gazebo>
     <plugin filename="libignition-gazebo-joint-state-publisher-system.so"
             name="ignition::gazebo::systems::JointStatePublisher">
       <topic>/joint_states</topic>
     </plugin>
+
     <plugin filename="libignition-gazebo-imu-system.so"
-            name="ignition::gazebo::systems::Imu">
-    </plugin>
+            name="ignition::gazebo::systems::Imu"/>
   </gazebo>
 
-  <!-- Left Wheel: Realistic Rubber Physics -->
-  <gazebo reference="left_wheel">
-    <mu1>0.8</mu1>        <!-- Friction parallel to the wheel (forward grip) -->
-    <mu2>0.8</mu2>        <!-- Friction perpendicular to the wheel (lateral grip) -->
-    <kp>500000.0</kp>     <!-- Contact stiffness: acts as the "squish" of the tire rubber -->
-    <kd>10.0</kd>         <!-- Contact damping: absorbs micro-bounces so the wheel stays on the ground -->
-    <minDepth>0.001</minDepth> <!-- Simulates a 1mm flat contact patch under the robot's weight -->
-  </gazebo>
-
-  <!-- Right Wheel: Realistic Rubber Physics -->
-  <gazebo reference="right_wheel">
-    <mu1>0.8</mu1>
-    <mu2>0.8</mu2>
-    <kp>500000.0</kp>
-    <kd>10.0</kd>
-    <minDepth>0.001</minDepth>
-  </gazebo>
-
-  <!-- LiDAR Sensor -->
+  <!-- ── LiDAR Sensor ── -->
   <gazebo reference="lidar_link">
     <sensor name="lidar" type="gpu_lidar">
       <always_on>1</always_on>
@@ -315,12 +447,12 @@
     </sensor>
   </gazebo>
 
-  <!-- IMU Sensor -->
+  <!-- ── IMU Sensor ── -->
   <gazebo reference="imu_link">
     <sensor name="imu_sensor" type="imu">
       <always_on>1</always_on>
       <update_rate>100</update_rate>
-      <topic>/imu</topic> 
+      <topic>/imu</topic>
       <ignition_frame_id>imu_link</ignition_frame_id>
       <imu>
         <orientation_reference_frame>
@@ -340,23 +472,22 @@
     </sensor>
   </gazebo>
 
-  <!-- Camera Sensor -->
+  <!-- ── RGB Camera Sensor ── -->
   <gazebo reference="camera_link">
     <sensor name="camera" type="camera">
       <always_on>1</always_on>
       <update_rate>30</update_rate>
       <topic>/camera/image_raw</topic>
-      <ignition_frame_id>camera_optical_link</ignition_frame_id>
+      <ignition_frame_id>camera_link</ignition_frame_id>
       <camera>
-        <!-- ~80 degrees -->
-        <horizontal_fov>1.3962634</horizontal_fov>
+        <horizontal_fov>1.3962634</horizontal_fov>  <!-- ~80° -->
         <image>
           <width>640</width>
           <height>480</height>
           <format>R8G8B8</format>
         </image>
         <clip>
-          <near>0.02</near>
+          <near>0.05</near>
           <far>300</far>
         </clip>
       </camera>

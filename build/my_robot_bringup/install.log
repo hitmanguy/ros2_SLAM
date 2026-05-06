@@ -2,7 +2,9 @@
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/lib/python3.10/site-packages/my_robot_bringup/__pycache__/__init__.cpython-310.pyc
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/ament_index/resource_index/packages/my_robot_bringup
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/package.xml
+/home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/launch/navigation.launch.py
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/launch/simulation.launch.py
+/home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/config/nav2_params.yaml
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/config/slam_toolbox_params.yaml
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/share/my_robot_bringup/config/ekf.yaml
 /home/sahil/Desktop/ros_learn/ros2_SLAM/install/my_robot_bringup/lib/python3.10/site-packages/my_robot_bringup-0.0.0-py3.10.egg-info/zip-safe
