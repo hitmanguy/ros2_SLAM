@@ -11,7 +11,6 @@ setup.py
 ../../../build/my_robot_control/my_robot_control.egg-info/zip-safe
 my_robot_control/__init__.py
 my_robot_control/ground_truth.py
-my_robot_control/odom_tf_broadcaster.py
 my_robot_control/simple_controller.py
 my_robot_control/square_move.py
 resource/my_robot_control
